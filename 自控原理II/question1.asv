@@ -1,0 +1,17 @@
+numerator=[0.05,1];
+denominator=conv([0.2,1],[0.1,1]),
+system1_zpk=tf(numerator, denominator)
+[zeros,poles,gain]=tf2zp(numerator,denominator)%零极点表达式
+system1_zpk=zpk(zeros,poles,gain)%零极点表达式
+[A,B,C,D]=tf2ss(numerator,denominator)%状态空间表达式
+system1_ss=ss(A,B,C,D)%状态空间表达式
+
+num2_1=[1,5]
+den2_1=conv(conv([1,0],[1,1]),[1,2]),
+sys2_1=tf(num2_1,den2_1)
+num2_2=1;
+den2_2=[1,1];
+sys2_2=tf(num2_2,den2_2)
+sys2_s=sys2_1*sys2_2%串联
+sys2_p=sys2_1+sys2 2%并联
+sys2_f=feedback(sys2 1,sys2 2,-1)%负反馈连接
